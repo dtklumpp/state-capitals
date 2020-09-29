@@ -190,6 +190,9 @@ for state in states:
     state["wrong"] = 0
 # print(states)
 
+total_right = 0
+total_wrong = 0
+
 
 def show_score(state):
     name = state["name"]
@@ -199,6 +202,8 @@ def show_score(state):
 
 
 def play_game(count):
+    global total_right
+    global total_wrong
     global states
     random.shuffle(states)
     states = sorted(states, key=lambda x: x["wrong"], reverse=True)
@@ -208,10 +213,15 @@ def play_game(count):
         state = states.pop(0)
         name = state["name"]
         capital = state["capital"]
+
         guess = input("guess the capitol of "+name+"!: ")
+        if guess.upper() == "HINT":
+            hint = state["capital"][0:3]
+            guess = input(f"hint: {hint}: ")
         if guess.upper() == capital.upper():
             print('good!')
             correct += 1
+            total_right += 1
             state["correct"] += 1
             show_score(state)
             print(f"overall score: {correct} to {wrong}")
@@ -221,6 +231,7 @@ def play_game(count):
         else:
             print('bad!')
             wrong += 1
+            total_wrong += 1
             state["wrong"] += 1
             show_score(state)
             print(f"overall score: {correct} to {wrong}")
@@ -240,6 +251,12 @@ while repeat:
     safety += 1
     if safety > 10:
         repeat = False
+
+print("done!")
+print(f"total right: {total_right}")
+print(f"total wrong: {total_wrong}")
+
+
 
 
 
