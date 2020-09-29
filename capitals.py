@@ -184,7 +184,6 @@ print('hi')
 # print(pop0)
 
 import random
-random.shuffle(states)
 
 for state in states:
     state["correct"] = 0
@@ -200,6 +199,9 @@ def show_score(state):
 
 
 def play_game(count):
+    global states
+    random.shuffle(states)
+    states = sorted(states, key=lambda x: x["wrong"], reverse=True)
     correct = 0
     wrong = 0
     for i in range(count):
@@ -239,3 +241,19 @@ while repeat:
     if safety > 10:
         repeat = False
 
+
+
+# nope is wrong
+# sorted_states = sorted(states.items(), key=lambda x: x[1])
+# print(sorted_states)
+
+
+#aha here we go
+# sorted_states = sorted(states, 
+# key=lambda x: x["capital"])
+
+
+# sorted_states = sorted(states, 
+# key=lambda x: x["wrong"], reverse=True)
+
+# print(sorted_states)
