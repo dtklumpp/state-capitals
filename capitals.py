@@ -200,6 +200,8 @@ def show_score(state):
 
 
 def play_game(count):
+    correct = 0
+    wrong = 0
     for i in range(count):
         state = states.pop(0)
         name = state["name"]
@@ -207,17 +209,21 @@ def play_game(count):
         guess = input("guess the capitol of "+name+"!: ")
         if guess.upper() == capital.upper():
             print('good!')
+            correct += 1
             state["correct"] += 1
             show_score(state)
+            print(f"overall score: {correct} to {wrong}")
             # wins = state["correct"]
             # losses = state["wrong"]
             # print(f"win-loss for {name}: {wins} to {losses}")
         else:
             print('bad!')
+            wrong += 1
             state["wrong"] += 1
             show_score(state)
+            print(f"overall score: {correct} to {wrong}")
         states.append(state)
-    print(states)
+    #print(states)
         # x = states[0].get("wrong")
         # print(x)
 
@@ -232,5 +238,4 @@ while repeat:
     safety += 1
     if safety > 10:
         repeat = False
-
 
