@@ -164,6 +164,9 @@ states = [
     "name": "Arizona",
     "capital": "Phoenix"
 }]
+
+
+
 # game gonna run game function
 # then ask if play again
 
